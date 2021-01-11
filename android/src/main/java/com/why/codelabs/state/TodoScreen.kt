@@ -34,34 +34,48 @@ fun TodoRow(
 }
 
 @Composable
-fun TodoScreen(
-    todos: List<TodoTask>,
-    onAddItem: (TodoTask) -> Unit,
-    onRemoveItem: (TodoTask) -> Unit
-) = Column {
-    LazyColumn(
-        modifier = Modifier.weight(1f),
-        contentPadding = PaddingValues(top = 8.dp)
-    ) {
-        items(
-            items = todos,
-            itemContent = { todoTask ->
-                TodoRow(
-                    todoTask = todoTask,
-                    onItemClicked = { onRemoveItem(it) },
-                    modifier = Modifier.fillParentMaxWidth()
-                )
-            })
-    }
-
+fun AddTodoTaskButton(onAddItem: (TodoTask) -> Unit) {
     Button(
         onClick = { onAddItem(generateTodoItem()) },
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth(),
     ) {
-        Text("Add random item")
+        Text("ADD RANDOM TASK")
     }
+}
+
+@Composable
+private fun TodoList(
+    modifier: Modifier = Modifier,
+    todos: List<TodoTask>,
+    onRemoveItem: (TodoTask) -> Unit
+) = LazyColumn(
+    modifier = modifier,
+    contentPadding = PaddingValues(top = 8.dp)
+) {
+    items(todos) { todoTask ->
+        TodoRow(
+            todoTask = todoTask,
+            onItemClicked = { onRemoveItem(it) },
+            modifier = Modifier.fillParentMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun TodoScreen(
+    todos: List<TodoTask>,
+    onAddItem: (TodoTask) -> Unit,
+    onRemoveItem: (TodoTask) -> Unit
+) = Column {
+    TodoList(
+        modifier = Modifier.Companion.weight(1f),
+        todos = todos,
+        onRemoveItem = onRemoveItem
+    )
+
+    AddTodoTaskButton(onAddItem)
 }
 
 @Preview(showBackground = true)
