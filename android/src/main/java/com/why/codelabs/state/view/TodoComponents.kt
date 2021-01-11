@@ -75,13 +75,13 @@ private fun SelectableIconButton(
 fun IconRow(
     modifier: Modifier = Modifier,
     selectedIcon: TodoIcon,
-    onIconChange: (TodoIcon) -> Unit
+    onIconSelected: (TodoIcon) -> Unit
 ) = Row(modifier) {
     for (todoIcon in TodoIcon.values())
         SelectableIconButton(
             icon = todoIcon.imageVector,
             isSelected = todoIcon == selectedIcon
-        ) { onIconChange(todoIcon) }
+        ) { onIconSelected(todoIcon) }
 }
 
 @Preview(showBackground = true)
@@ -111,37 +111,31 @@ fun TodoEditButtonPreview() = TodoEditButton("Edit") { /*TODO*/ }
 @Composable
 fun AnimatedIconRow(
     modifier: Modifier = Modifier,
-    icon: TodoIcon,
+    selectedIcon: TodoIcon,
     visible: Boolean = true,
     initialVisibility: Boolean = false,
-    onIconChange: (TodoIcon) -> Unit
+    onIconSelected: (TodoIcon) -> Unit
 ) {
     // remember these specs so they don't restart if recomposing during
-    // the animation, this is required since TweenSpec restarts on interruption
-    val enter = remember {
-        fadeIn(
-            animSpec = TweenSpec(
-                300,
-                easing = FastOutLinearInEasing
-            )
-        )
+    // the animation, this is required since TweenSpec restarts on interruption.
+    val fadeIn = remember {
+        fadeIn(animSpec = TweenSpec(300, easing = FastOutLinearInEasing))
     }
-    val exit = remember {
-        fadeOut(
-            animSpec = TweenSpec(
-                100,
-                easing = FastOutSlowInEasing
-            )
-        )
+    val fadeOut = remember {
+        fadeOut(animSpec = TweenSpec(100, easing = FastOutSlowInEasing))
     }
+
     Box(modifier.defaultMinSizeConstraints(minHeight = 16.dp)) {
         AnimatedVisibility(
             visible = visible,
+            enter = fadeIn,
+            exit = fadeOut,
             initiallyVisible = initialVisibility,
-            enter = enter,
-            exit = exit,
         ) {
-            IconRow(selectedIcon = icon, onIconChange = onIconChange)
+            IconRow(
+                selectedIcon = selectedIcon,
+                onIconSelected = onIconSelected
+            )
         }
     }
 }
@@ -150,7 +144,7 @@ fun AnimatedIconRow(
 @Preview(showBackground = true)
 @Composable
 fun AnimatedIconRowPreview() = AnimatedIconRow(
-    icon = TodoIcon.Done
+    selectedIcon = TodoIcon.Done
 ) { /*TODO*/ }
 
 
