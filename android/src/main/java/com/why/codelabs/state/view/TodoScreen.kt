@@ -1,4 +1,4 @@
-package com.why.codelabs.state
+package com.why.codelabs.state.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,25 +16,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.why.codelabs.state.util.generateTodoItem
+import com.why.codelabs.state.view.util.generateTodoItem
 
 @Composable
 fun TodoRow(
-    todoTask: TodoTask,
-    onItemClicked: (TodoTask) -> Unit,
+    todoItem: TodoItem,
+    onItemClicked: (TodoItem) -> Unit,
     modifier: Modifier = Modifier
 ) = Row(
     modifier = modifier
-        .clickable { onItemClicked(todoTask) }
+        .clickable { onItemClicked(todoItem) }
         .padding(horizontal = 16.dp, vertical = 8.dp),
     horizontalArrangement = Arrangement.SpaceBetween
 ) {
-    Text(todoTask.title)
-    Icon(todoTask.icon.imageVector)
+    Text(todoItem.text)
+    Icon(todoItem.icon.imageVector)
 }
 
 @Composable
-fun AddRandomTaskButton(onAddItem: (TodoTask) -> Unit) {
+fun AddRandomTaskButton(onAddItem: (TodoItem) -> Unit) {
     Button(
         onClick = { onAddItem(generateTodoItem()) },
         modifier = Modifier
@@ -48,15 +48,15 @@ fun AddRandomTaskButton(onAddItem: (TodoTask) -> Unit) {
 @Composable
 private fun TodoList(
     modifier: Modifier = Modifier,
-    todos: List<TodoTask>,
-    onRemoveItem: (TodoTask) -> Unit
+    todos: List<TodoItem>,
+    onRemoveItem: (TodoItem) -> Unit
 ) = LazyColumn(
     modifier = modifier,
     contentPadding = PaddingValues(top = 8.dp)
 ) {
     items(todos) { todoTask ->
         TodoRow(
-            todoTask = todoTask,
+            todoItem = todoTask,
             onItemClicked = { onRemoveItem(it) },
             modifier = Modifier.fillParentMaxWidth()
         )
@@ -65,12 +65,12 @@ private fun TodoList(
 
 @Composable
 fun TodoScreen(
-    todos: List<TodoTask>,
-    onAddItem: (TodoTask) -> Unit,
-    onRemoveItem: (TodoTask) -> Unit
+    todos: List<TodoItem>,
+    onAddItem: (TodoItem) -> Unit,
+    onRemoveItem: (TodoItem) -> Unit
 ) = Column {
     TodoList(
-        modifier = Modifier.Companion.weight(1f),
+        modifier = Modifier.weight(1f),
         todos = todos,
         onRemoveItem = onRemoveItem
     )
@@ -83,7 +83,7 @@ fun TodoScreen(
 fun PreviewTodoRow() {
     val todoTask = remember { generateTodoItem() }
     TodoRow(
-        todoTask = todoTask,
+        todoItem = todoTask,
         onItemClicked = {},
         modifier = Modifier.fillMaxWidth()
     )
@@ -93,10 +93,10 @@ fun PreviewTodoRow() {
 @Composable
 fun PreviewTodoScreen() {
     val items = listOf(
-        TodoTask("Learn compose", TodoIcon.Event),
-        TodoTask("Take the codelab"),
-        TodoTask("Apply state", TodoIcon.Done),
-        TodoTask("Build dynamic UIs", TodoIcon.Square)
+        TodoItem("Learn compose", TodoIcon.Event),
+        TodoItem("Take the codelab"),
+        TodoItem("Apply state", TodoIcon.Done),
+        TodoItem("Build dynamic UIs", TodoIcon.Square)
     )
     TodoScreen(items, {}, {})
 }

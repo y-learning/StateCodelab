@@ -1,4 +1,4 @@
-package com.why.codelabs.state
+package com.why.codelabs.state.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

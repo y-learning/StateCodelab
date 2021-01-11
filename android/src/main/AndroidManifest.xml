@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StateCodelab">
         <activity
-            android:name="com.why.codelabs.state.TodoActivity"
+            android:name="com.why.codelabs.state.view.TodoActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.StateCodelab.NoActionBar">
             <intent-filter>

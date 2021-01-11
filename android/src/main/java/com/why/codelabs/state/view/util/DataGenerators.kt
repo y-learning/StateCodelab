@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.why.codelabs.state.util
+package com.why.codelabs.state.view.util
 
-import com.why.codelabs.state.TodoIcon
-import com.why.codelabs.state.TodoTask
+import com.why.codelabs.state.view.TodoIcon
+import com.why.codelabs.state.view.TodoItem
 import kotlin.random.Random
 
 private fun randomTint(): Float = Random.nextFloat().coerceIn(0.3f, 0.9f)
@@ -34,7 +34,7 @@ private val messages = listOf(
     "Use state from stateless composables"
 )
 
-fun generateTodoItem(): TodoTask = TodoTask(messages.random(), TodoIcon.Random)
+fun generateTodoItem(): TodoItem = TodoItem(messages.random(), TodoIcon.Random)
 
 fun main() {
     val list = listOf(1, 2, 3)

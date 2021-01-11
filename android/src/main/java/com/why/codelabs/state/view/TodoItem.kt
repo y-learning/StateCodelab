@@ -1,9 +1,9 @@
-package com.why.codelabs.state
+package com.why.codelabs.state.view
 
 import java.util.*
 
-data class TodoTask(
-    val title: String,
+data class TodoItem(
+    val text: String,
     val icon: TodoIcon = TodoIcon.Default,
     val id: UUID = UUID.randomUUID()
 )

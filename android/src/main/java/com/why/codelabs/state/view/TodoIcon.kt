@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.why.codelabs.state
+package com.why.codelabs.state.view
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CropSquare
