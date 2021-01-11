@@ -6,7 +6,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.platform.setContent
 import com.why.codelabs.state.theme.StateCodelabTheme
 
-class MainActivity : AppCompatActivity() {
+class TodoActivity : AppCompatActivity() {
 //    val todoViewModel by viewModels<TodoViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
