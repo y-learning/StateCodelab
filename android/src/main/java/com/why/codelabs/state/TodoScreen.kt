@@ -34,7 +34,7 @@ fun TodoRow(
 }
 
 @Composable
-fun AddTodoTaskButton(onAddItem: (TodoTask) -> Unit) {
+fun AddRandomTaskButton(onAddItem: (TodoTask) -> Unit) {
     Button(
         onClick = { onAddItem(generateTodoItem()) },
         modifier = Modifier
@@ -75,7 +75,7 @@ fun TodoScreen(
         onRemoveItem = onRemoveItem
     )
 
-    AddTodoTaskButton(onAddItem)
+    AddRandomTaskButton(onAddItem)
 }
 
 @Preview(showBackground = true)
