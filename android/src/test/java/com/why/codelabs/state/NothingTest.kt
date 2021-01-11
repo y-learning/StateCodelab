@@ -1,4 +1,4 @@
-package com.why.composetemplate
+package com.why.codelabs.state
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.ints.shouldBeExactly

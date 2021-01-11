@@ -13,6 +13,8 @@ dependencies {
     implementation(Libs.Compose.ui)
     implementation(Libs.Compose.uiTooling)
     implementation(Libs.Compose.material)
+    implementation(Libs.Compose.icons)
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 
 
     testImplementation(Libs.Kotest.runner)
@@ -25,7 +27,7 @@ android {
     buildToolsVersion("30.0.3")
 
     defaultConfig {
-        applicationId = "com.why.composetemplate"
+        applicationId = "com.why.codelabs.state"
         minSdkVersion(22)
         targetSdkVersion(30)
         versionCode = 1
