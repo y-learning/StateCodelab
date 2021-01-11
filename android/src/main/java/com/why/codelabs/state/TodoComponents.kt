@@ -1,6 +1,5 @@
 package com.why.codelabs.state
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animate
@@ -40,7 +39,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @ExperimentalAnimationApi
-@SuppressLint("RememberReturnType")
 @Composable
 fun AnimatedIconRow(
     icon: TodoIcon,
