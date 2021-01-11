@@ -27,9 +27,17 @@ object Libs {
 
         const val ui = "androidx.compose.ui:ui:$version"
         const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
+        const val foundation = "androidx.compose.foundation:foundation:$version"
+        const val foundationLayout =
+            "androidx.compose.foundation:foundation-layout:$version"
         const val material = "androidx.compose.material:material:$version"
         const val icons =
             "androidx.compose.material:material-icons-extended:$version"
+        const val animation = "androidx.compose.animation:animation:$version"
+        const val runtimeLivedata =
+            "androidx.compose.runtime:runtime-livedata:$version"
+        const val runtime =
+            "androidx.compose.runtime:runtime:$version"
     }
 
     object Kotest {

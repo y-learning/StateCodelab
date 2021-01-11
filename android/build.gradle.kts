@@ -14,8 +14,11 @@ dependencies {
     implementation(Libs.Compose.uiTooling)
     implementation(Libs.Compose.material)
     implementation(Libs.Compose.icons)
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-
+    implementation(Libs.Compose.animation)
+    implementation(Libs.Compose.runtime)
+    implementation(Libs.Compose.runtimeLivedata)
+    implementation(Libs.Compose.foundation)
+    implementation(Libs.Compose.foundationLayout)
 
     testImplementation(Libs.Kotest.runner)
     testImplementation(Libs.Kotest.assertions)
