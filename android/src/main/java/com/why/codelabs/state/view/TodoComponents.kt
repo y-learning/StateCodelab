@@ -74,19 +74,19 @@ private fun SelectableIconButton(
 @Composable
 fun IconRow(
     modifier: Modifier = Modifier,
-    icon: TodoIcon,
+    selectedIcon: TodoIcon,
     onIconChange: (TodoIcon) -> Unit
 ) = Row(modifier) {
     for (todoIcon in TodoIcon.values())
         SelectableIconButton(
             icon = todoIcon.imageVector,
-            isSelected = todoIcon == icon
+            isSelected = todoIcon == selectedIcon
         ) { onIconChange(todoIcon) }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewIconRow() = IconRow(icon = TodoIcon.Square) {}
+fun PreviewIconRow() = IconRow(selectedIcon = TodoIcon.Square) {}
 
 @Composable
 fun TodoEditButton(
@@ -141,7 +141,7 @@ fun AnimatedIconRow(
             enter = enter,
             exit = exit,
         ) {
-            IconRow(icon = icon, onIconChange = onIconChange)
+            IconRow(selectedIcon = icon, onIconChange = onIconChange)
         }
     }
 }
