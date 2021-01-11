@@ -5,15 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TodoViewModel : ViewModel() {
-    private var _todoItems = MutableLiveData(listOf<TodoItem>())
+    private var _todoItems = MutableLiveData(listOf<TodoTask>())
 
-    val todoItems: LiveData<List<TodoItem>> = _todoItems
+    val todoItems: LiveData<List<TodoTask>> = _todoItems
 
-    fun addItem(item: TodoItem) {
+    fun addItem(item: TodoTask) {
         _todoItems.value = _todoItems.value!! + listOf(item)
     }
 
-    fun removeItem(item: TodoItem) {
+    fun removeItem(item: TodoTask) {
         _todoItems.value = _todoItems.value!!.toMutableList().also {
             it.remove(item)
         }

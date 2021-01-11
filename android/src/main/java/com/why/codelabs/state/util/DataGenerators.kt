@@ -17,7 +17,10 @@
 package com.why.codelabs.state.util
 
 import com.why.codelabs.state.TodoIcon
-import com.why.codelabs.state.TodoItem
+import com.why.codelabs.state.TodoTask
+import kotlin.random.Random
+
+private fun randomTint(): Float = Random.nextFloat().coerceIn(0.3f, 0.9f)
 
 private val messages = listOf(
     "Learn compose",
@@ -31,7 +34,7 @@ private val messages = listOf(
     "Use state from stateless composables"
 )
 
-fun generateTodoItem(): TodoItem = TodoItem(messages.random(), TodoIcon.Random)
+fun generateTodoItem(): TodoTask = TodoTask(messages.random(), TodoIcon.Random)
 
 fun main() {
     val list = listOf(1, 2, 3)

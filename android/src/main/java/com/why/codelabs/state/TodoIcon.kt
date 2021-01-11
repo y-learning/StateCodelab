@@ -23,13 +23,6 @@ import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.PrivacyTip
 import androidx.compose.material.icons.filled.RestoreFromTrash
 import androidx.compose.ui.graphics.vector.ImageVector
-import java.util.*
-
-data class TodoItem(
-    val task: String,
-    val icon: TodoIcon = TodoIcon.Default,
-    val id: UUID = UUID.randomUUID()
-)
 
 enum class TodoIcon(val imageVector: ImageVector) {
     Square(Icons.Default.CropSquare),

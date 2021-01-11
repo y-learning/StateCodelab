@@ -171,7 +171,7 @@ fun TodoItemInputBackground(
 }
 
 /**
- * Styled [TextField] for inputting a [TodoItem].
+ * Styled [TextField] for inputting a [TodoTask].
  *
  * @param text (state) current text to display
  * @param onTextChange (event) request the text change state
