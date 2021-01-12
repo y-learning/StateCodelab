@@ -34,7 +34,8 @@ private val messages = listOf(
     "Use state from stateless composables"
 )
 
-fun generateTodoItem(): TodoItem = TodoItem(messages.random(), TodoIcon.Random)
+fun generateTodoItem(): TodoItem =
+    TodoItem(messages.random(), TodoIcon.values().random())
 
 fun main() {
     val list = listOf(1, 2, 3)

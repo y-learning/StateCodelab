@@ -33,6 +33,5 @@ enum class TodoIcon(val imageVector: ImageVector) {
 
     companion object {
         val Default = Square
-        val Random = values().random()
     }
 }
