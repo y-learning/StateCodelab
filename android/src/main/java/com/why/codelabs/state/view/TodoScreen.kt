@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.AmbientContentColor
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.why.codelabs.state.view.util.generateTodoItem
+import com.why.codelabs.state.view.util.randomTint
 
 @Composable
 fun TodoRow(
@@ -30,7 +32,11 @@ fun TodoRow(
     horizontalArrangement = Arrangement.SpaceBetween
 ) {
     Text(todoItem.text)
-    Icon(todoItem.icon.imageVector)
+    val iconAlpha = remember(todoItem.id) { randomTint() }
+    Icon(
+        todoItem.icon.imageVector,
+        tint = AmbientContentColor.current.copy(alpha = iconAlpha)
+    )
 }
 
 @Composable

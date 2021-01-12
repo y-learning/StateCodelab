@@ -20,7 +20,7 @@ import com.why.codelabs.state.view.TodoIcon
 import com.why.codelabs.state.view.TodoItem
 import kotlin.random.Random
 
-private fun randomTint(): Float = Random.nextFloat().coerceIn(0.3f, 0.9f)
+fun randomTint(): Float = Random.nextFloat().coerceIn(0.3f, 0.9f)
 
 private val messages = listOf(
     "Learn compose",
