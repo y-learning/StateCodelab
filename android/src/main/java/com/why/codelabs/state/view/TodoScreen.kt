@@ -13,12 +13,42 @@ import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.why.codelabs.state.view.util.generateTodoItem
 import com.why.codelabs.state.view.util.randomTint
+
+@Composable
+fun TodoItemInput(onAddTodoItem: (TodoItem) -> Unit) {
+    val (text, setText) = remember { mutableStateOf("") }
+    Column {
+        Row(
+            Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp)
+        ) {
+            TodoInputText(
+                text,
+                Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
+                onTextChange = setText
+            )
+            TodoEditButton(
+                "Add",
+                modifier = Modifier.align(Alignment.CenterVertically),
+                enabled = text.isNotBlank()
+            ) {
+                onAddTodoItem(TodoItem(text))
+                setText("")
+            }
+        }
+    }
+}
 
 @Composable
 fun TodoRow(
@@ -75,6 +105,12 @@ fun TodoScreen(
     onAddItem: (TodoItem) -> Unit,
     onRemoveItem: (TodoItem) -> Unit
 ) = Column {
+    TodoItemInputBackground(
+        elevate = true,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        TodoItemInput(onAddTodoItem = onAddItem)
+    }
     TodoList(
         modifier = Modifier.weight(1f),
         todos = todos,
@@ -82,6 +118,12 @@ fun TodoScreen(
     )
 
     AddRandomTaskButton(onAddItem)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewTodoItemInput() {
+    TodoItemInput(onAddTodoItem = { })
 }
 
 @Preview(showBackground = true)
