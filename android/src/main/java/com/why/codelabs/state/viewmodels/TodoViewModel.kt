@@ -1,4 +1,4 @@
-package com.why.codelabs.state
+package com.why.codelabs.state.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
