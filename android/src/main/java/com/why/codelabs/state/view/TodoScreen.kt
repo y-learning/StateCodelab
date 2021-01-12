@@ -1,12 +1,15 @@
 package com.why.codelabs.state.view
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.AmbientContentColor
 import androidx.compose.material.Button
@@ -22,30 +25,51 @@ import androidx.compose.ui.unit.dp
 import com.why.codelabs.state.view.util.generateTodoItem
 import com.why.codelabs.state.view.util.randomTint
 
+const val DEFAULT_INPUT = ""
+val DEFAULT_ICON = TodoIcon.Default
+
+@ExperimentalAnimationApi
 @Composable
 fun TodoItemInput(onAddTodoItem: (TodoItem) -> Unit) {
-    val (text, setText) = remember { mutableStateOf("") }
+    val (text, setText) = remember { mutableStateOf(DEFAULT_INPUT) }
+    val (icon, setIcon) = remember { mutableStateOf(DEFAULT_ICON) }
+    val userInputFilled = text.isNotBlank()
+    fun resetInternalState() {
+        setText(DEFAULT_INPUT)
+        setIcon(DEFAULT_ICON)
+    }
+
     Column {
         Row(
             Modifier
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp)
         ) {
+            val addTodoItem = {
+                onAddTodoItem(TodoItem(text, icon))
+                resetInternalState()
+            }
             TodoInputText(
-                text,
-                Modifier
+                text = text,
+                modifier = Modifier
                     .weight(1f)
                     .padding(end = 8.dp),
+                onImeAction = addTodoItem,
                 onTextChange = setText
             )
             TodoEditButton(
                 "Add",
                 modifier = Modifier.align(Alignment.CenterVertically),
-                enabled = text.isNotBlank()
-            ) {
-                onAddTodoItem(TodoItem(text))
-                setText("")
-            }
+                enabled = userInputFilled,
+                onClick = addTodoItem
+            )
+        }
+        when {
+            userInputFilled -> AnimatedIconRow(
+                Modifier.padding(top = 8.dp),
+                selectedIcon = icon,
+                onIconSelected = { setIcon(it) })
+            else -> Spacer(modifier = Modifier.preferredHeight(16.dp))
         }
     }
 }
@@ -99,6 +123,7 @@ private fun TodoList(
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun TodoScreen(
     todos: List<TodoItem>,
@@ -120,6 +145,7 @@ fun TodoScreen(
     AddRandomTaskButton(onAddItem)
 }
 
+@ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 fun PreviewTodoItemInput() {
@@ -137,6 +163,7 @@ fun PreviewTodoRow() {
     )
 }
 
+@ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 fun PreviewTodoScreen() {
