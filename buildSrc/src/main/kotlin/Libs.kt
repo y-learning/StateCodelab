@@ -14,6 +14,7 @@ object Libs {
         const val appcompat = "androidx.appcompat:appcompat:1.2.0"
         const val lifecycle =
             "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-rc01"
+        const val activity = "androidx.activity:activity-ktx:1.2.0-rc01"
     }
 
     object AndroidMaterial {
