@@ -20,10 +20,13 @@ dependencies {
     implementation(Libs.Compose.runtimeLivedata)
     implementation(Libs.Compose.foundation)
     implementation(Libs.Compose.foundationLayout)
+    implementation(Libs.Y.core)
+    implementation(Libs.Y.collections)
 
     testImplementation(Libs.Kotest.runner)
     testImplementation(Libs.Kotest.assertions)
     testImplementation(Libs.Kotest.property)
+
 }
 
 android {

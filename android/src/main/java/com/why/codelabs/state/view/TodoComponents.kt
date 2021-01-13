@@ -56,16 +56,15 @@ private fun SelectableIconButton(
     ) {
         Column {
             Icon(icon, tint = tint)
-            if (isSelected) {
-                Box(
+            when {
+                isSelected -> Box(
                     Modifier
                         .padding(top = 3.dp)
                         .preferredWidth(icon.defaultWidth)
                         .preferredHeight(1.dp)
                         .background(tint)
                 )
-            } else {
-                Spacer(modifier = Modifier.preferredHeight(4.dp))
+                else -> Spacer(modifier = Modifier.preferredHeight(4.dp))
             }
         }
     }
