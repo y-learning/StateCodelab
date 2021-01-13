@@ -2,7 +2,6 @@ package com.why.codelabs.state.view
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -125,13 +124,12 @@ fun TodoRow(
     modifier = modifier
         .clickable { onItemClicked(todoItem) }
         .padding(horizontal = 16.dp, vertical = 8.dp),
-    horizontalArrangement = Arrangement.SpaceBetween
 ) {
-    Text(todoItem.text)
+    Text(todoItem.text, modifier = Modifier.weight(1f))
     val iconAlpha = remember(todoItem.id) { randomTint() }
     Icon(
         todoItem.icon.imageVector,
-        tint = AmbientContentColor.current.copy(alpha = iconAlpha)
+        tint = AmbientContentColor.current.copy(alpha = iconAlpha),
     )
 }
 
