@@ -4,60 +4,50 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.github.whyrising.y.concretions.vector.PersistentVector
-import com.github.whyrising.y.concretions.vector.toPvector
-import com.github.whyrising.y.concretions.vector.v
-import com.github.whyrising.y.vector.APersistentVector
+import com.github.whyrising.y.concretions.map.m
+import com.github.whyrising.y.map.IPersistentMap
 import com.why.codelabs.state.view.TodoItem
+import java.util.*
+
+private val DEFAULT_UUID: UUID =
+    UUID.fromString("11111111-1111-1111-1111-111111111111")
 
 class TodoViewModel : ViewModel() {
-    private var _currentEditIndex by mutableStateOf(-1)
+
+    private var _currentEditIndex by mutableStateOf(DEFAULT_UUID)
 
     val currentEditItem: TodoItem?
         get() = todoItems.valAt(_currentEditIndex)
 
-    var todoItems by mutableStateOf(v<TodoItem>())
+    //TODO: Replace with PersistentTreeMap when it's available in y library.
+    var todoItems: IPersistentMap<UUID, TodoItem> by mutableStateOf(m())
         private set
 
     fun setIndexOfSelectedItem(item: TodoItem) {
-        _currentEditIndex = todoItems.indexOf(item)
+        _currentEditIndex = item.id
     }
 
     fun resetCurrentEditIndex() {
-        _currentEditIndex = -1
+        _currentEditIndex = DEFAULT_UUID
     }
 
+    @ExperimentalStdlibApi
     fun updateSelectedItem(item: TodoItem) {
         val currentItem = requireNotNull(currentEditItem)
         require(currentItem.id == item.id) {
             "You can only change an item with the same id as currentEditItem"
         }
 
-        todoItems = todoItems.assoc(
-            _currentEditIndex,
-            item
-        ) as PersistentVector<TodoItem>
+        todoItems = todoItems.assoc(item.id, item)
     }
 
+    @ExperimentalStdlibApi
     fun addItem(item: TodoItem) {
-        todoItems = todoItems.conj(item)
+        todoItems = todoItems.assocNew(item.id, item)
     }
 
     fun removeItem(item: TodoItem) {
-        fun removeTodoItemBy(index: Int) {
-            // TODO: use concat function when it's available in y library
-            val p1 = (todoItems.subvec(0, index) as APersistentVector<TodoItem>)
-                .toPvector()
-            val p2 = (todoItems.subvec(
-                index + 1,
-                todoItems.count
-            ) as APersistentVector<TodoItem>)
-
-            todoItems = p2.fold(p1) { acc, todoItem -> acc.conj(todoItem) }
-        }
-
-        val index = todoItems.indexOf(item)
-        removeTodoItemBy(index)
+        todoItems = todoItems.dissoc(item.id)
 
         resetCurrentEditIndex()
     }
